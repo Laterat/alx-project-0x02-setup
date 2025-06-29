@@ -1,7 +1,5 @@
 
-
 import { type ButtonProps } from "@/interfaces";
-
 
 const Button:React.FC<ButtonProps>=({size,shape})=>{
 
