@@ -10,6 +10,7 @@ const Header: React.FC = () =>{
                   <div className='flex items-center space-x-4'>
                       <Link  className="hover:underline" href="/home">home</Link>
                       <Link className="hover:underline" href="/about">about</Link>
+                      <Link className="hover:underline" href="/posts">posts</Link>
                   </div>
              
               </div>
