@@ -28,17 +28,15 @@ const Post: React.FC<{posts: PostProps[]}>=({posts})=>{
 export  const getStaticProps = async()=>{
            const response = await fetch("https://jsonplaceholder.typicode.com/posts")
            const data= await response.json();
-          const posts=(
-                         data.map((post: any) => ({
+          const posts=              data.map((post: any) => ({
                                                     title: post.title,
                                                     content: post.body,
                                                     userId: post.userId
-                                                  }))
-                                                );      
-                                          return{
-                                              props: {posts}
-                                          };
-                                              }
+                                                  }));      
+         return{
+                        props: {posts}
+             };
+     }
 
 export default Post;
 
