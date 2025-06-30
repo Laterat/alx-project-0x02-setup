@@ -1,32 +1,12 @@
 import Header from "@/components/layout/Header"
 import PostCard from "@/components/common/PostCard";
 import { PostProps } from "@/interfaces";
-import React, {useState, useEffect} from 'react';
-import { title } from "process";
 
 
-const Post: React.FC=()=>{
 
-    const [posts, setPosts] = useState<PostProps[]>([]);
+const Post: React.FC<{posts: PostProps[]}>=({posts})=>{
 
-    useEffect(
-               ()=>{
-                     const fetchData= async()=>{
-                                                 const response = await fetch("https://jsonplaceholder.typicode.com/posts")
-                                                 const data= await response.json();
-                                                setPosts(
-                                                  data.map((post: any) => ({
-                                                    title: post.title,
-                                                    content: post.body,
-                                                    userId: post.userId
-                                                  }))
-                                                );      
-                                          }
-             
-             fetchData();               }
-        ,[]);
-
-
+   
     return(
         <>
            <Header/>
@@ -45,6 +25,38 @@ const Post: React.FC=()=>{
     );
 }
 
+export  const getStaticProps = async()=>{
+           const response = await fetch("https://jsonplaceholder.typicode.com/posts")
+           const data= await response.json();
+          const posts=(
+                         data.map((post: any) => ({
+                                                    title: post.title,
+                                                    content: post.body,
+                                                    userId: post.userId
+                                                  }))
+                                                );      
+                                          return{
+                                              props: {posts}
+                                          };
+                                              }
 
 export default Post;
 
+
+// {  useEffect(
+//                ()=>{
+//                      const fetchData= async()=>{
+//                                                  const response = await fetch("https://jsonplaceholder.typicode.com/posts")
+//                                                  const data= await response.json();
+//                                                 setPosts(
+//                                                   data.map((post: any) => ({
+//                                                     title: post.title,
+//                                                     content: post.body,
+//                                                     userId: post.userId
+//                                                   }))
+//                                                 );      
+//                                           }
+             
+//              fetchData();               }
+//         ,[]);
+//}
